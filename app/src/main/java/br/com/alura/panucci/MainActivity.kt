@@ -31,14 +31,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            LaunchedEffect(Unit) {
-                navController.addOnDestinationChangedListener { _, _, _ ->
-                    val routes = navController.backQueue.map {
-                        it.destination.route
-                    }
-                    Log.i("MainActivity", "onCreate: back stack - $routes")
-                }
-            }
+
             val backStackEntryState by navController.currentBackStackEntryAsState()
             val currentDestination = backStackEntryState?.destination
             PanucciTheme {
